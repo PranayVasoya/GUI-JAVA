@@ -5,6 +5,8 @@
 package main;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -12,8 +14,11 @@ import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.sql.*;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Timer;
 /**
  *
  * @author Pranay.Vasoya
@@ -29,6 +34,8 @@ public class mainForm extends javax.swing.JFrame {
     public mainForm() {
         initComponents();
         conn = MyConnection.getConnection();
+        showDate();
+        showTime();
     }
     
     public mainForm(String empName, String empDes) {
@@ -36,8 +43,26 @@ public class mainForm extends javax.swing.JFrame {
         conn = MyConnection.getConnection();
         lblEmpName.setText(empName.toUpperCase());
         lblEmpDesignation.setText(empDes);
+        showDate();
+        showTime();
     }
     
+    public void showDate(){
+        Date d = new Date();
+        SimpleDateFormat s =new SimpleDateFormat("dd-MM-yyyy");
+        String formattedDate = s.format(d);
+        date.setText(formattedDate);
+    }
+    public void showTime(){
+        new Timer (0, new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                Date d= new Date();
+                SimpleDateFormat s = new SimpleDateFormat("hh-mm-ss");
+                String tim = s.format(d);
+                time.setText(tim);
+            }
+        }).start();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +81,8 @@ public class mainForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         btn6 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
         headerPanel = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         centrePanel = new javax.swing.JPanel();
@@ -224,23 +251,35 @@ public class mainForm extends javax.swing.JFrame {
         btn6.setLayout(btn6Layout);
         btn6Layout.setHorizontalGroup(
             btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
         );
         btn6Layout.setVerticalGroup(
             btn6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
         );
 
+        date.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        date.setText("date");
+
+        time.setFont(new java.awt.Font("Book Antiqua", 1, 18)); // NOI18N
+        time.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        time.setText("time");
+
         javax.swing.GroupLayout sidePanelLayout = new javax.swing.GroupLayout(sidePanel);
         sidePanel.setLayout(sidePanelLayout);
         sidePanelLayout.setHorizontalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblEmpName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(lblEmpDesignation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(sidePanelLayout.createSequentialGroup()
+                .addGroup(sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(time, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblEmpName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         sidePanelLayout.setVerticalGroup(
             sidePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,9 +291,13 @@ public class mainForm extends javax.swing.JFrame {
                 .addComponent(lblEmpDesignation)
                 .addGap(87, 87, 87)
                 .addComponent(btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                 .addComponent(btn6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGap(18, 18, 18)
+                .addComponent(date, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(time, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         getContentPane().add(sidePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -2004,6 +2047,7 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JLabel contact3;
     private javax.swing.JLabel contact4;
     private javax.swing.JLabel contact5;
+    private javax.swing.JLabel date;
     private javax.swing.JPanel deleteEmployee;
     private javax.swing.JPanel header;
     private javax.swing.JPanel header1;
@@ -2072,6 +2116,7 @@ public class mainForm extends javax.swing.JFrame {
     private javax.swing.JLabel salary4;
     private javax.swing.JLabel salary5;
     private javax.swing.JPanel sidePanel;
+    private javax.swing.JLabel time;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtAddress1;
     private javax.swing.JTextField txtAddress2;
