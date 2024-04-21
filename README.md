@@ -26,11 +26,6 @@ The Employee Management System is a Java Swing-based application designed to str
 ## Contributions:
 Contributions are highly encouraged! Feel free to contribute bug fixes, enhancements, or new features by submitting pull requests. Please adhere to the project's coding standards and guidelines.
 
-## License:
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
-## Contact Information:
-For any inquiries or support, please reach out to [email@example.com](mailto:email@example.com).
 
-## Acknowledgments:
-Special thanks to [mention contributors or resources] for their valuable contributions and insights during the development of this project.
+
