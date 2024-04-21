@@ -133,7 +133,7 @@ public class signupForm extends javax.swing.JFrame {
         jLabel6.setText("Designation:");
 
         txtCombo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        txtCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "HR manager", "Employee" }));
+        txtCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Administrator", "HR ", "Finance", "Operations" }));
         txtCombo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 2, 1, new java.awt.Color(153, 153, 153)));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
